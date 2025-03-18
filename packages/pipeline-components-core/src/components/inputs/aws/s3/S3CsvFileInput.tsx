@@ -98,7 +98,7 @@ export class S3CsvFileInput extends BaseCoreComponent {
       csvOptions.names = `['${config.names.join("', '")}']`; // Format names as a Python list
       csvOptions.header = 0; // Set header to 0 if names are provided
     }
-
+    console.log("s3---config===",config);
     // Prepare options string for pd.read_csv
     let optionsString = Object.entries(csvOptions)
       .filter(([key, value]) => value !== null && value !== '' && !(key === 'sep' && value === 'infer'))
@@ -120,6 +120,7 @@ export class S3CsvFileInput extends BaseCoreComponent {
 # Reading data from ${config.filePath}
 ${outputName} = pd.read_csv("${config.filePath}"${optionsString ? `, ${optionsString}` : ''}).convert_dtypes()
 `;
+console.log("s3-code=====",code);
     return code;
   }
 

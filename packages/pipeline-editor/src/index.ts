@@ -427,7 +427,7 @@ ${args.code}
               await commands.execute('pipeline-editor:run-pipeline', { code });
 
               // Handle successful pipeline run
-              console.log('Pipeline executed successfully');
+              console.log('Pipeline executed successfully------------>');
 
             } catch (reason) {
               console.error(`An error occurred during pipeline execution: ${reason}`);

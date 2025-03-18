@@ -6,10 +6,8 @@ export class AzureOptionsHandler {
         if (config.fileLocation === 'azb' && config.connectionMethod === 'storage_options') {
             return {
                 ...storageOptions, // Preserve any manually added storageOptions
-                service_account_file: config.gcsServiceAccountFilePath,
-                account_name : "",
-                account_key : "",
-                container_name : ""
+                account_name : config.awsAccessKey,
+                sas_token: config.awsSecretKey
             };
         }
         return storageOptions;
@@ -26,32 +24,32 @@ export class AzureOptionsHandler {
               { value: "storage_options", label: "Pass directly (storage_options)", tooltip: "You can pass credentials using the storage_options parameter. Using Environment Variables for this method is also recommended." }
             ],
             condition: { fileLocation: "azb" },
-            connection: "AZB",
+            connection: "Azure-----",
             ignoreConnection: true,
             advanced: true
           },
           {
             type: "input",
-            label: "Access Key",
-            id: "azbAccessKey",
+            label: "Storage -- Account",
+            id: "awsAccessKey",
             placeholder: "Enter Access Key",
             inputType: "password",
             connection: "AZB",
-            connectionVariableName: "AZB_ACCESS_KEY_ID",
+            connectionVariableName: "AWS_ACCESS_KEY_ID",
             condition: { fileLocation: "azb", connectionMethod: "storage_options" },
             advanced: true
           },
           {
             type: "input",
-            label: "Secret Key",
-            id: "azbSecretKey",
+            label: "SAS Token",
+            id: "awsSecretKey",
             placeholder: "Enter Secret Key",
             inputType: "password",
             connection: "AZB",
-            connectionVariableName: "AZB_SECRET_ACCESS_KEY",
+            connectionVariableName: "AWS_SECRET_ACCESS_KEY",
             condition: { fileLocation: "azb", connectionMethod: "storage_options" },
             advanced: true
-          }
+          },
         ];
       }
   }

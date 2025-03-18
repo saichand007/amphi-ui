@@ -232,7 +232,9 @@ ${outputName} = pd.read_csv("${config.filePath}"${optionsString}).convert_dtypes
       storageOptions = { ...transformedStorageOptions, ...s3Options };
     } else {
       // Ensure S3-specific options are handled when storageOptions is not an array
-      storageOptions = S3OptionsHandler.handleS3SpecificOptions(config, storageOptions);
+      storageOptions = config.fileLocation === 'azb' ?
+      AzureOptionsHandler.handleAZBptions(config, storageOptions)
+      :S3OptionsHandler.handleS3SpecificOptions(config, storageOptions);
     }
 
     // Update the storage_options in csvOptions

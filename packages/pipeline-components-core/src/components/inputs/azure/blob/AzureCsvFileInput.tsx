@@ -71,7 +71,7 @@ export class AzureCsvFileInput extends BaseCoreComponent {
   }
 
   public provideImports({ config }): string[] {
-    return ["import pandas as pd", "import boto3"];
+    return ["import pandas as pd", "import adlfs"];
   }
 
   public generateComponentCode({ config, outputName }): string {
@@ -113,13 +113,15 @@ export class AzureCsvFileInput extends BaseCoreComponent {
           return `${key}=${value}`; // Handle numbers and Python's None without quotes
         }
       })
-      .join(', ');
+      .join(', ');   
 
-    // Generate the Python code
+  // Generate the Python code
     const code = `
-# Reading data from ${config.filePath}
+# Readinggggggg data from--------> ${config.filePath}
+# Readingwwwww config from--------> ${config.storage_options}
 ${outputName} = pd.read_csv("${config.filePath}"${optionsString ? `, ${optionsString}` : ''}).convert_dtypes()
 `;
+
     return code;
   }
 

@@ -65,7 +65,7 @@ export class AzureBlobFileInput extends BaseCoreComponent {
 
     const description = "Use File Input to read data from a file remotely (Azure blob). Supports CSV, JSON, Excel, Parquet, and XML formats.";
 
-    super("Azure Blob File Input", "azureBlobFileInput", description, "pandas_df_input", [], "inputs.Azure", azureServicesIcon, defaultConfig, form);
+    super("Azure Blob File Input", "azureBlobFileInput", description, "pandas_df_input", [], "inputs.AZB", azureServicesIcon, defaultConfig, form);
   }
 
   public provideDependencies({ config }): string[] {
@@ -83,6 +83,7 @@ export class AzureBlobFileInput extends BaseCoreComponent {
   }
 
   public generateComponentCode({ config, outputName }): string {
+    console.log("configconfigconfigconfigconfigconfig=",config);
     if (config.fileType === "csv") {
       const csvComponent = new CsvFileInput();
       return csvComponent.generateComponentCode({ config, outputName });

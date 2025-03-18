@@ -101,7 +101,8 @@ export class BaseCoreComponent extends PipelineComponent<ComponentItem>() {
       const timestamp = Date.now()
         
       const flow = PipelineService.filterPipeline(context.model.toString());
-
+      console.log("flow=",flow);
+      console.log("componentService=",componentService);
       // Get nodes to traverse and related data
       const { nodesToTraverse, nodesMap } = CodeGenerator.computeNodesToTraverse(
         flow,
@@ -119,16 +120,17 @@ export class BaseCoreComponent extends PipelineComponent<ComponentItem>() {
      console.log("this._default =", this._default);
     //  console.log("this._form =", this._form);
      console.log("nodeId=",nodeId);
-     console.log("context=",context);
+     console.log("context=====>",context);
+
       commands.execute('pipeline-editor:run-pipeline-until', { nodeId: nodeId, context: context }).then(result => {
-      console.log("result===",result);
-        setNodes(prevNodes =>
-          prevNodes.map(node =>
-            nodesToTraverse.includes(node.id)
-              ? { ...node, data: { ...node.data, lastExecuted: timestamp, successfulExecution: true } }
-              : node
-          )
-        );
+      console.log("result===>",result);
+        // setNodes(prevNodes =>
+        //   prevNodes.map(node =>
+        //     nodesToTraverse.includes(node.id)
+        //       ? { ...node, data: { ...node.data, lastExecuted: timestamp, successfulExecution: true } }
+        //       : node
+        //   )
+        // );
 
       })
       .catch(reason => {
